@@ -14,7 +14,7 @@ module Zuck
     parent_object :ad_account
     list_path     :adimages
 
-    def self.copy_from(destination_account_id: nil, destination_account: nil, source_account: nil, source_account_id: nil, hash:)
+    def self.copy_from(destination_account_id: nil, destination_account: nil, source_account: nil, source_account_id: nil, hash: nil)
       src_id = (source_account.try(:id) || source_account_id).to_s.gsub("act_","")
       dst_id = (destination_account.try(:id) || destination_account_id).to_s.gsub("act_","")
       raise "Missing source_account[_id]" if not src_id
