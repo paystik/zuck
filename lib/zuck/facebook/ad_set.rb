@@ -14,6 +14,7 @@ module Zuck
                :account_id,
                :bid_amount,
                :bid_info,
+               :billing_event,
                :buying_type,
                :campaign_group_id, #DEPRECATED
                :created_time,
