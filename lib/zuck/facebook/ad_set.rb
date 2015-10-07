@@ -12,15 +12,33 @@ module Zuck
     known_keys :id,
                :name,
                :account_id,
-               :campaign_group_id,
-               :start_time,
-               :updated_time,
+               :bid_amount,
+               :bid_info,
+               :buying_type,
+               :campaign_group_id, #DEPRECATED
                :created_time,
-               :promoted_object
+               :end_time,
+               :frequency_cap,
+               :frequency_cap_reset_period,
+               :is_autobid,
+               :lifetime_fequency_cap,
+               :lifetime_imps,
+               :optimization_goal,
+               :product_ad_behavior,
+               :promoted_object,
+               :rf_prediction_id,
+               :rtb_flag,
+               :start_time,
+               :targeting,
+               :updated_time,
+               :pacing_type,
+               :budget_remaining,
+               :daily_budget,
+               :lifetime_budget
 
     parent_object :ad_account, as: :account_id
     list_path     :adcampaigns # Yes, this is correct, "for legacy reasons"
-    connections   :ad_groups, :ad_creatives
+    connections   :ad_groups, :ad_creatives, :insights
 
   end
 end
