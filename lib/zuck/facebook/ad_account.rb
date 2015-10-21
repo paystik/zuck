@@ -9,6 +9,17 @@ module Zuck
     known_keys :id,
                :account_groups,
                :account_id,
+               # Status of the account 
+               # 1 = ACTIVE
+               # 2 = DISABLED
+               # 3 = UNSETTLED
+               # 7 = PENDING_RISK_REVIEW
+               # 9 = IN_GRACE_PERIOD
+               # 100 = PENDING_CLOSURE
+               # 101 = CLOSED
+               # 102 = PENDING_SETTLEMENT
+               # 201 = ANY_ACTIVE
+               # 202 = ANY_CLOSED
                :account_status,
                :age,
                :agency_client_declaration,
@@ -72,7 +83,8 @@ module Zuck
 
 
     list_path   'me/adaccounts'
-    connections :ad_campaigns, :ad_sets, :ad_groups, :custom_audiences, :ad_images
+    connections :ad_campaigns, :ad_sets, :ad_groups, :custom_audiences, :ad_images,
+      :ad_creatives
     # TODO: All edges from https://developers.facebook.com/docs/marketing-api/reference/ad-account/adcreatives/
     # :activities,              # AdActivity log for the ad account
     # :adlabels,                # labels associated with ad account
