@@ -84,20 +84,21 @@ module Zuck
 
     list_path   'me/adaccounts'
     connections :ad_campaigns, :ad_sets, :ad_groups, :custom_audiences, :ad_images,
-      :ad_creatives
+      :ad_creatives,             # all the ad creatives for this account (across campaigns)
+      :campaigns
     # TODO: All edges from https://developers.facebook.com/docs/marketing-api/reference/ad-account/adcreatives/
     # :activities,              # AdActivity log for the ad account
     # :adlabels,                # labels associated with ad account
-    # :adcreatives,             # all the ad creatives for this account (across campaigns)
+    # :adcreatives,
     # :adcreativesbylabels,     # Don't Care For Now
     # :ads,               # >= v2.5, all ads for the account
     # :adimages,                # all images used in ad creatives
     # :adreportruns,            # all bookmarked async runs of the account
     # :adreportschedules,       # all scheduled reports of the account
-    # :adsets,            #DCNF >= v2.5 
+    # :adsets,            #>= v2.5 
     # :adsbylabels,       #DCNF >= v2.5 - DCFN
     # :adsetsbylabels,    #DCNF >= v2.5 - DCFN
-    # :campaigns,         #DCNF >= v2.5
+    # :campaigns,         #>= v2.5
     # :campaignsbylabels, #DCNF >= v2.5 - DCFN
     # :minimum_budgets,         # /minimum_budgets/ - minimum daily budget values by currency
     # targetingbrowse,          #DCFN
