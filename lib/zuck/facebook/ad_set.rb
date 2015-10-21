@@ -1,30 +1,33 @@
 require 'zuck/facebook/ad_creative'
 
 module Zuck
+  # An ad set is a group of ads. i.e. an ad-campaign
   class AdSet < RawFbObject
 
     # Known keys as per
-    # [fb docs](https://developers.facebook.com/docs/reference/ads-api/adset/v2.4)
-    ## Note: Ad Set vs. Ad Campaign
-    ## Prior to July 2014 ad sets were referred to as 'campaigns'. When using ad
-    ## sets in API calls the parameter may be referred to as 'adcampaign'. A
-    ## campaign contains one or more ad sets.
-    known_keys :id,
-               :name,
+    # [fb docs](https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/)
+    known_keys :adlables,
+               :adset_schedule,
+               :id,
                :account_id,
+               :adasset_feed,
                :bid_amount,
                :bid_info,
-               :billing_event,
-               :buying_type,
-               :campaign_group_id, #DEPRECATED
+               :billing_event,     #Possible values are APP_INSTALLS, CLICKS, IMPRESSIONS, LINK_CLICKS, OFFER_CLAIMS, PAGE_LIKES, POST_ENGAGEMENT, VIDEO_VIEWS.
+               :campaign,          #The campaign that contains this ad set
+               :campaign_id,
+               :configured_status, #Possible values are ACTIVE, PAUSED, ARCHIVED, DELETED.
                :created_time,
+               :creative_sequence, #Order of the adgroup sequence to be shown to users
+               :effective_status,  #Possible values are ACTIVE, PAUSED, ARCHIVED, DELETED, CAMPAIGN_PAUSED.
                :end_time,
                :frequency_cap,
                :frequency_cap_reset_period,
-               :is_autobid,
+               :is_autobid,        #Did the advertiser express the intent to bid automatically. This field is not available if bid_info or bid_amount is returned.
                :lifetime_fequency_cap,
                :lifetime_imps,
-               :optimization_goal,
+               :name,
+               :optimization_goal, #NONE, APP_INSTALLS, BRAND_AWARENESS, CLICKS, ENGAGED_USERS, EXTERNAL, EVENT_RESPONSES, IMPRESSIONS, LINK_CLICKS, OFFER_CLAIMS, OFFSITE_CONVERSIONS, PAGE_ENGAGEMENT, PAGE_LIKES, POST_ENGAGEMENT, REACH, SOCIAL_IMPRESSIONS, VIDEO_VIEWS
                :product_ad_behavior,
                :promoted_object,
                :rf_prediction_id,
@@ -32,14 +35,25 @@ module Zuck
                :start_time,
                :targeting,
                :updated_time,
+               :use_new_app_click, #If set, allows Mobile App Engagement ads to optimize for LINK_CLICKS
                :pacing_type,
                :budget_remaining,
                :daily_budget,
                :lifetime_budget
 
     parent_object :ad_account, as: :account_id
-    list_path     :adcampaigns # Yes, this is correct, "for legacy reasons"
+    list_path     :adsets
     connections   :ad_groups, :ad_creatives, :insights
+    #TODO: add connections where appropriate for
+    # activitities,
+    # adcreatives,
+    # ads,
+    # asyncadrequests,
+    # reachestimate,
+    # targeting_sentencelines,
+    # insights,
+    # conversions,
+    # stats
 
   end
 end
