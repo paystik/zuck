@@ -6,7 +6,6 @@ module Zuck
     known_keys :actor_id,             #The Facebook object ID of the Page, which is the actor for a link ad not connected to a Page.
                :body,                 #The body of the ad
                :image_crops,          #A JSON object defining crop dimensions for the image specified.
-               :image_file,           #1/3 Reference to a local image file to upload for use in creatives. Not to exceed 8MB in size. OR
                :image_hash,           #2/3 Image hash for an image you have uploaded and can be used in creatives OR
                :image_url,            #3/3 
                :link_url,             #A URL for the image for this creative. You should not use image URLs returned from the FB CDN
