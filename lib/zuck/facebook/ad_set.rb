@@ -10,7 +10,6 @@ module Zuck
                :adset_schedule,
                :id,
                :account_id,
-               :adasset_feed,
                :bid_amount,
                :bid_info,
                :billing_event,     #Possible values are APP_INSTALLS, CLICKS, IMPRESSIONS, LINK_CLICKS, OFFER_CLAIMS, PAGE_LIKES, POST_ENGAGEMENT, VIDEO_VIEWS.
