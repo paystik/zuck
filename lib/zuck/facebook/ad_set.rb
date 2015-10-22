@@ -62,5 +62,13 @@ module Zuck
       super(graph, data, campaign, path)
     end
 
+    def ad_account
+      if campaign
+        campaign.ad_account
+      elsif account_id
+        AdAccount.find( account_id )
+      end
+    end
+
   end
 end
