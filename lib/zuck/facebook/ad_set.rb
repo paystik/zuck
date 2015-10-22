@@ -1,9 +1,9 @@
 require 'zuck/facebook/ad_creative'
 
 module Zuck
-  # An ad set is a group of ads. i.e. an ad-campaign
   class AdSet < RawFbObject
-
+    # 3rd level container object
+    # An ad set is a group of ads.
     # Known keys as per
     # [fb docs](https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/)
     known_keys :adlables,
@@ -44,15 +44,15 @@ module Zuck
     list_path     :adsets
     connections   :ad_groups, :ad_creatives, :insights
     #TODO: add connections where appropriate for
-    # activitities,
-    # adcreatives,
-    # ads,
-    # asyncadrequests,
-    # reachestimate,
-    # targeting_sentencelines,
-    # insights,
-    # conversions,
-    # stats
+    # activitities,    NEEDS research
+    # adcreatives,     EXISTS as :ad_creatives
+    # ads,             EXISTS as :ad_groups
+    # asyncadrequests, NEEDS research
+    # reachestimate,   NEEDS research
+    # targeting_sentencelines, NEEDS research
+    # insights,        EXISTS
+    # conversions,     NEEDS research
+    # stats            NEEDS research
 
   end
 end
