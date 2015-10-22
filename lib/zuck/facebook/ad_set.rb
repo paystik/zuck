@@ -13,7 +13,7 @@ module Zuck
                :bid_amount,
                :bid_info,
                :billing_event,     #Possible values are APP_INSTALLS, CLICKS, IMPRESSIONS, LINK_CLICKS, OFFER_CLAIMS, PAGE_LIKES, POST_ENGAGEMENT, VIDEO_VIEWS.
-               :campaign,          #The campaign that contains this ad set
+               # :campaign,          #The campaign that contains this ad set
                :campaign_id,
                :configured_status, #Possible values are ACTIVE, PAUSED, ARCHIVED, DELETED.
                :created_time,
@@ -40,7 +40,7 @@ module Zuck
                :daily_budget,
                :lifetime_budget
 
-    parent_object :ad_account, as: :account_id
+    parent_object :campaign, as: :campaign_id
     list_path     :adsets
     connections   :ad_groups, :ad_creatives, :insights
     #TODO: add connections where appropriate for
@@ -53,6 +53,14 @@ module Zuck
     # insights,        EXISTS
     # conversions,     NEEDS research
     # stats            NEEDS research
+
+    #look what I learned over in ad_group
+    def self.create(graph, data, campaign)
+      path = campaign.ad_account.path
+      data['account_id'] = campaign.account_id
+      data['campaign_id'] = campaign.id
+      super(graph, data, campaign, path)
+    end
 
   end
 end
