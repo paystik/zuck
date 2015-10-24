@@ -1,114 +1,53 @@
 module Zuck
   class Insight < RawFbObject
-    # https://developers.facebook.com/docs/marketing-api/insights/v2.4#fields
-    #Koala::Facebook::ClientError: type: OAuthException, code: 100,
-    # message: (#100) actions_per_impression, wesite_ctr are not valid for fields param. All valid values are:
-    ## date_start, 
-    ## date_stop, 
-    ## account_id, 
-    ## account_name, 
-    ## adgroup_id, 
-    ## adgroup_name, 
-    ## buying_type, 
-    ## campaign_group_id, 
-    ## campaign_group_name, 
-    ## campaign_id, 
-    ## campaign_name, 
-    ## action_carousel_card_id, 
-    ## action_carousel_card_name, 
-    ## actions, 
-    ## unique_actions, 
-    ## total_actions, 
-    ## total_unique_actions, 
-    ## action_values, 
-    ## total_action_value, 
-    ## impressions, 
-    ## social_impressions, 
-    ## clicks, 
-    ## social_clicks, 
-    ## unique_impressions, 
-    ## unique_social_impressions, 
-    ## unique_clicks, 
-    ## unique_social_clicks, 
-    ## spend, 
-    ## frequency, 
-    ## social_spend, 
-    ## deeplink_clicks, 
-    ## app_store_clicks, 
-    ## website_clicks, 
-    ## call_to_action_clicks, 
-    ## newsfeed_avg_position, 
-    ## newsfeed_impressions, 
-    ## newsfeed_clicks, 
-    ## reach, 
-    ## social_reach, 
-    ## ctr, 
-    ## unique_ctr, 
-    ## unique_link_clicks_ctr, 
-    ## cpc, 
-    ## cpm, 
-    ## cpp, 
-    ## cost_per_total_action, 
-    ## cost_per_action_type, 
-    ## cost_per_unique_click, 
-    ## cost_per_10_sec_video_view, 
-    ## cost_per_unique_action_type, 
-    ## card_views, 
-    ## relevance_score, 
-    ## website_ctr, 
-    ## video_avg_sec_watched_actions, 
-    ## video_avg_pct_watched_actions, 
-    ## video_p25_watched_actions, 
-    ## video_p50_watched_actions, 
-    ## video_p75_watched_actions, 
-    ## video_p95_watched_actions, 
-    ## video_p100_watched_actions, 
-    ## video_complete_watched_actions, 
-    ## video_10_sec_watched_actions, 
-    ## video_15_sec_watched_actions, 
-    ## video_30_sec_watched_actions, 
-    ## estimated_ad_recallers, 
-    ## estimated_ad_recallers_lower_bound, 
-    ## estimated_ad_recallers_upper_bound, 
-    ## estimated_ad_recall_rate, 
-    ## estimated_ad_recall_rate_lower_bound, 
-    ## estimated_ad_recall_rate_upper_bound
-               # id fields
-    known_keys :account_id,
-               :adgroup_id,
-               :campaign_id,
-               :campaign_group_id,
+    # 3rd level edge
+    read_only
+    # This insights edge consolidates functionality from /stats, /conversions, and /reportstats edges. It provides a single, consistent interface for insights.
+    # [fb docs](https://developers.facebook.com/docs/marketing-api/insights/v2.4#fields)
+    known_keys :account_id,            #ID number that is unique to your ad account.
+               :ad_id,                 #ID number that is unique to each ad.
+               :adset_id,              #ID number that is unique to each ad set.
+               :campaign_id,           #ID number that is unique to each campaign.
+               # name fields
+               :account_name,
+               :ad_name,
+               :adset_name,
+               :campaign_name,
                # date fields
-               :date_start,
-               :date_stop,
+               :date_start,            #The start date for your data.
+               :date_stop,             #The end date for your data.
                # general fields
-               :call_to_action_clicks,
-               :clicks,
-               :unique_clicks,
-               :cost_per_total_action,
-               :cpc,
-               :cost_per_unique_click,
-               :cpm,
-               :cpp,
-               :ctr,
-               :unique_ctr,
-               :frequency,
-               :impressions,
-               :reach,
-               :relevance_score,
-               :social_clicks,
-               :unique_social_clicks,
-               :social_impressions,
-               :social_reach,
-               :spend,
-               :total_action_value,
-               :total_actions,
-               :total_unique_actions,
+               :call_to_action_clicks, #Total number of clicks on the call to action button of the ad.
+               :unique_clicks,         #The total number of unique people who have clicked on your ad. 
+               :inline_link_clicks,    #Total number of clicks on links in the ad
+               :cost_per_inline_link_click,      #The average cost per click on links in the ad
+               :inline_post_engagement,#Total number of engagements on the post
+               :cost_per_inline_post_engagement, #The average cost per engagement on the post
+               :cost_per_total_action, #The average you've spent on actions.
+               :cost_per_unique_click, #The average cost per unique click for these ads, calculated as the amount spent divided by the number of unique clicks received.
+               :cpm,                   #The average cost you've paid to have 1,000 impressions on your ad.
+               :cpp,                   #The average cost you've paid to have your ad served to 1,000 unique people.
+               :ctr,                   #The number of clicks you received divided by the number of impressions.
+               :website_ctr,           #An object containing the number of clicks you received on a link in the ad divided by the number of impressions broken down by action type.
+               :unique_ctr,            #The number of people who clicked on your ad divided by the number of people you reached.
+               :frequency,             #The average number of times your ad was served to each person.
+               :impressions,           #The number of times your ad was served.
+               :reach,                 #The number of people your ad was served to.
+               :relevance_score,       #Ad relevance score is multiple metrics related to how your audience responded to your ad.
+               :social_clicks,         #The number of clicks your ad receives when it's shown with social information
+               :unique_social_clicks,  #The number of individuals who clicked this ad while it had social context.
+               :social_impressions,    #The number of times your ad was served, with social information.
+               :social_reach,          #The number of people your ad was served to with social information. 
+               :spend,                 #The total amount you've spent so far.
+               :total_action_value,    #The total revenue returned from conversions or Facebook credit spends that occurred on your website or app.
+               :total_actions,         #The number of actions taken on your ad, Page, app or event after your ad was served to someone, even if they didn't click on it.
+               :total_unique_actions,  #The number of unique people who took an action such as liking your Page or installing your app as a result of your ad.
                # action and video fields
                :action_values,
                :actions,
                :cost_per_action_type
-    parent_object :ad_campaign
+               #video related fields
+    parent_object :campaign
     list_path :insights
   end
 end
