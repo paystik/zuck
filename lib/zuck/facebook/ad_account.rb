@@ -43,24 +43,24 @@ module Zuck
                :end_advertiser,
                :end_advertiser_name,
                :failed_delivery_checks,
-               :funding_source,
+               :funding_source,                 #ID of the payment method. If the account does not have a payment method it will still be possible to create ads but these ads will get no delivery.
                :funding_source_details,
                :has_migrated_permissions,
                :io_number,
                :is_notifications_enabled,
                :is_personal,
                :is_prepay_account,
-               :is_tax_id_required,
+               :is_tax_id_required,             #If tax id for this ad account is required or not
                :line_numbers,
                :media_agency,
                :min_campaign_group_spend_cap,
-               :min_daily_budget,
+               :min_daily_budget,               #minimum daily budget values by currency
                :name,
-               :owner,
+               :owner,                          #The ID of the account owner
                :offsite_pixels_tos_accepted,
-               :partner,
+               :partner,                        #The ID of a Facebook Page or Facebook App
                :tax_id,
-               :tax_id_status,
+               :tax_id_status,                  #VAT status code for the account.
                :tax_id_type,
                :timezone_id,
                :timezone_name,
@@ -69,38 +69,41 @@ module Zuck
                :tos_accepted,
                :user_role,
                :vertical_name,
-               :amount_spent,
+               :amount_spent,                   #Current total amount spent by the account. This can be reset.
                # The maximum that can be spent by this account after which campaigns
                # will be paused. A value of 0 signifies no spending-cap and setting
                # a new spend cap only applies to spend AFTER the time at which you
                # set it. Value specified in basic unit of the currency, e.g. cents for USD.
                :spend_cap,
-               :balance,
-               :business,
+               :balance,                        #Bill amount due
+               :business,                       #The Business Manager, if this ad account is owned by one
                :owner_business,
                :last_used_time,
                :asset_score
 
 
     list_path   'me/adaccounts'
-    connections :ad_campaigns, :ad_sets, :ad_groups, :custom_audiences, :ad_images,
-      :ad_creatives,             # all the ad creatives for this account (across campaigns)
-      :campaigns
+    connections :campaigns,          #2nd level
+                :ad_sets,            #3rd level
+                :ad_groups,          #4th level
+                :custom_audiences,   #2nd level
+                :ad_images,          #2nd level
+                :ad_creatives,       # all the ad creatives for this account (across campaigns)
+
     # TODO: All edges from https://developers.facebook.com/docs/marketing-api/reference/ad-account/adcreatives/
     # :activities,              # AdActivity log for the ad account
     # :adlabels,                # labels associated with ad account
     # :adcreatives,
     # :adcreativesbylabels,     # Don't Care For Now
-    # :ads,               # >= v2.5, all ads for the account
+    # :ads,                     # >= v2.5, all ads for the account
     # :adimages,                # all images used in ad creatives
     # :adreportruns,            # all bookmarked async runs of the account
     # :adreportschedules,       # all scheduled reports of the account
-    # :adsets,            #>= v2.5 
-    # :adsbylabels,       #DCNF >= v2.5 - DCFN
-    # :adsetsbylabels,    #DCNF >= v2.5 - DCFN
-    # :campaigns,         #>= v2.5
-    # :campaignsbylabels, #DCNF >= v2.5 - DCFN
-    # :minimum_budgets,         # /minimum_budgets/ - minimum daily budget values by currency
+    # :adsets,                  #>= v2.5 
+    # :adsbylabels,             #DCNF >= v2.5 - DCFN
+    # :adsetsbylabels,          #DCNF >= v2.5 - DCFN
+    # :campaignsbylabels,       #DCNF >= v2.5 - DCFN
+    # :minimum_budgets,         # /minimum_budgets/ - 
     # targetingbrowse,          #DCFN
     # targetingsearch,          #DCFN
     # targetingsuggestions,     #DCFN
