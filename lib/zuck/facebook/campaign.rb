@@ -1,7 +1,6 @@
 module Zuck
   class Campaign < RawFbObject
     # 2nd level container object
-    # aka AdCampaignGroup
     # A campaign is a grouping of ad sets which are organized by the same business objective. Each campaign has an objective that must be valid across the ad sets within that campaign.
     # https://developers.facebook.com/docs/marketing-api/reference/ad-campaign-group
     known_keys :id,                #graph id

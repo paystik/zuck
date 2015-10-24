@@ -15,8 +15,8 @@ module Zuck
       set_data(data)
 
       # If the parent is an {AdAccount} we only want to set it as this
-      # object's direct parent when this object is an {AdCampaign}.
-      if !parent.is_a?(AdAccount) or parent.is_a?(AdAccount) and self.is_a?(AdCampaign)
+      # object's direct parent when this object is an {Campaign}.
+      if !parent.is_a?(AdAccount) or parent.is_a?(AdAccount) and self.is_a?(Campaign)
         set_parent(parent)
       end
     end

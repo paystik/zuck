@@ -13,7 +13,7 @@ module Zuck
     #
     # I feel it is example time, here's an imaginary ad campaign:
     #
-    #     class AdCampaign < FbObject
+    #     class Campaign < FbObject
     #
     #       known_keys    :title, :budget
     #       list_path     :adcampaigns
@@ -24,15 +24,15 @@ module Zuck
     #
     # These handy things are now provided by {FbObject} to your object:
     #
-    # 1.  Each `AdCampaign` object has a `title` and `budget` method. In
+    # 1.  Each `Campaign` object has a `title` and `budget` method. In
     #     case facebook returned more information than what's documented
     #     (there are a lot of these), you can still call
     #     `my_campaign[:secret_key]` to get to the juicy bits
-    # 2.  You can call `AdCampaign.all(graph, my_ad_account)`, because your
-    #     `AdCampaign` instance knows how to construct the path
+    # 2.  You can call `Campaign.all(graph, my_ad_account)`, because your
+    #     `Campaign` instance knows how to construct the path
     #     `act_12345/adcampaigns`. It knows this, because it knows its
     #     parent object and its own list path.
-    # 3.  You can call `#ad_groups` on any `AdCampaign` instance to fetch 
+    # 3.  You can call `#ad_groups` on any `Campaign` instance to fetch 
     #     the ad groups in that campaign. To add an ad_group to a campaign,
     #     you can call `AdGroup.create(graph, data, my_campaign)`, or for
     #     short: `my_campaign.create_ad_group(data)`
