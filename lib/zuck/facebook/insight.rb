@@ -5,14 +5,14 @@ module Zuck
     # This insights edge consolidates functionality from /stats, /conversions, and /reportstats edges. It provides a single, consistent interface for insights.
     # [fb docs](https://developers.facebook.com/docs/marketing-api/insights/v2.4#fields)
     known_keys :account_id,            #ID number that is unique to your ad account.
-               :ad_id,                 #ID number that is unique to each ad.
-               :adset_id,              #ID number that is unique to each ad set.
+               # :ad_id,                 #ID number that is unique to each ad.
+               # :adset_id,              #ID number that is unique to each ad set.
                :campaign_id,           #ID number that is unique to each campaign.
                # name fields
-               :account_name,
-               :ad_name,
-               :adset_name,
-               :campaign_name,
+               :account_name,          
+               # :ad_name,
+               # :adset_name,
+               :campaign_name,         
                # date fields
                :date_start,            #The start date for your data.
                :date_stop,             #The end date for your data.
@@ -33,7 +33,7 @@ module Zuck
                :frequency,             #The average number of times your ad was served to each person.
                :impressions,           #The number of times your ad was served.
                :reach,                 #The number of people your ad was served to.
-               :relevance_score,       #Ad relevance score is multiple metrics related to how your audience responded to your ad.
+               # :relevance_score,     #BREAKS campaign.insights  #Ad relevance score is multiple metrics related to how your audience responded to your ad.
                :social_clicks,         #The number of clicks your ad receives when it's shown with social information
                :unique_social_clicks,  #The number of individuals who clicked this ad while it had social context.
                :social_impressions,    #The number of times your ad was served, with social information.
