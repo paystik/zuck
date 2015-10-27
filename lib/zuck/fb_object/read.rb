@@ -65,16 +65,27 @@ module Zuck
       # objects through their direct parent, e.g.
       # `my_ad_group.ad_creatives`.
       #
-      # @param graph [Koala::Facebook::API] A graph with access_token
+      # You can also pass a custom arg hash to be forwarded to `graph.get_object` to
+      # filter the result set with additional params, e.g. to find insights for a
+      # date range:
+      # `campaign.insights(time_range: \{since: date1.to_s, until: date2.to_s\})
+      # See the Params section of {marketing-api/insights/v2.5}[https://developers.facebook.com/docs/marketing-api/insights/v2.5]
+      # for additional useful filter params
+      #
+      # @param graph [Koala::Facebook::API] A graph with access_token, defaults to configured Zuck.graph
       # @param parent [<FbObject] A parent object to scope
-      def all(graph = Zuck.graph, parent = nil)
+      # @param cutom_args [Hash] A hash of filtering args
+      def all(graph = Zuck.graph, parent = nil, custom_args={})
         parent ||= parent_ad_account_fallback
         path = path_with_parent(parent)
 
         begin
           ret = []
           fields = _known_keys
-          graph_collection = graph.get_object(path, fields: fields.compact.join(','), limit: 500)
+          object_args = {fields: fields.compact.join(','),
+                         limit: 500}
+          object_args.merge!(custom_args) if custom_args.is_a?( Hash )
+          graph_collection = graph.get_object(path, object_args)
           loop do
             ret += Array(graph_collection)
             break if not graph_collection.paging or not graph_collection.paging['next']
