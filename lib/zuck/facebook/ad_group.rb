@@ -8,7 +8,7 @@ module Zuck
     known_keys :id,
                :account_id,        #Ad Account ID
                :adset_id,          #Ad Set ID
-               :campaign_group_id, #Campaign ID
+               :campaign_id, #Campaign ID
                :adlabels,
                :bid_amount,        #Bid amount for this ad set, defined as your true value bid based on optimization_goal. This field is not available if is_autobid is true or when bid_info is returned.
                :bid_info,          #Map of bid objective to bid value. This field is not available if is_autobid is true.
@@ -25,11 +25,11 @@ module Zuck
     parent_object :ad_set, as: :adset_id
     list_path     :ads
     connections   :ad_creatives, #Creative associated with this ad
-                  :insights      #A Statistics result for an Ad object
+                  :insights,     #A Statistics result for an Ad object
+                  :previews      #Preview of the ad
     #TODO: Remaining edges from https://developers.facebook.com/docs/marketing-api/reference/adgroup
     # :leads,                  #Leads submitted for this ad
     # :keywordstats,           #Stats of keywords of this ad
-    # :previews,               #Preview of the ad
     # :reachestimate,          #Reach Estimation
     # :targetingsentencelines, #The targeting description sentence for this ad
 
