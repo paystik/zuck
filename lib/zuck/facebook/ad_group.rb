@@ -8,7 +8,8 @@ module Zuck
     known_keys :id,
                :account_id,        #Ad Account ID
                :adset_id,          #Ad Set ID
-               :campaign_id,       #Campaign ID
+               # :campaign_group_id, #deprecated on read Campaign ID
+               :campaign_id,      #Campaign ID
                :adlabels,
                :bid_amount,        #Bid amount for this ad set, defined as your true value bid based on optimization_goal. This field is not available if is_autobid is true or when bid_info is returned.
                :bid_info,          #Map of bid objective to bid value. This field is not available if is_autobid is true.
@@ -49,8 +50,9 @@ module Zuck
     def self.create(graph, data, ad_set)
       path = ad_set.ad_account.path
       data[:adset_id] = ad_set.id
-      data[:campaign_id] = ad_set.campaign_id
-      # ensure adds don't start by accident
+      # only valid on create
+      data[:campaign_group_id] = ad_set.campaign_id
+      # ensure ads don't start by accident
       data[:status] = 'PAUSED'
       super(graph, data, ad_set, path)
     end
