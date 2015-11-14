@@ -43,7 +43,7 @@ module Zuck
     list_path     :adsets
     connections   :ad_groups,     #The ads under this ad set
                   :ad_creatives,  #Reference document for using Facebook Marketing APIs to manage your ad creative
-                  :insights       #Ad Insights API  feat. eduping across child objects, sorting, async reports.
+                  :ad_set_insights       #Ad Insights API  feat. eduping across child objects, sorting, async reports.
     #TODO: add connections where appropriate for
     # activitities,            #Facebook Ads Activity Log API
     # asyncadrequests,         #Async ad requests for this ad set
