@@ -21,5 +21,13 @@ module Zuck
     parent_object :ad_account, as: :account_id
     list_path :campaigns
     connections  :ad_sets, :insights, :ad_groups #, :stats
+
+    # allowed update params:
+    #   name
+    #   objective
+    #   status
+    #   spend_cap
+    #   execution_options
+    #   adlabels
   end
 end

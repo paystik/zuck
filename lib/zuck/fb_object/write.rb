@@ -14,20 +14,31 @@ module Zuck
 
       # Don't post ids, because facebook doesn't like it
       data = data.keep_if{ |k,v| k != "id" }
+      if data['effective_status']
+        data['status'] = data.delete('effective_status')
+      end
 
       # Update on facebook
       result = post(graph, path, data)
 
       # The data is nested by name and id, e.g.
       #
-      #     "campaigns" => { "12345" => "data" }
+      #     "ad_sets" => { "12345" => "data" }
       #
-      # Since we only put one at a time, we'll fetch this like that.
-      data = result["data"].values.first.values.first
-      known_data = data.keep_if{|k,v| known_keys.include?(k.to_sym) }
+      # v2.5 Objects that don't support redownload on update:
+      #   Campaign
+      if result['data']
+        # Since we only put one at a time, we'll fetch this like that.
+        data = result["data"].values.first.values.first
+        known_data = data.keep_if{|k,v| known_keys.include?(k.to_sym) }
 
-      merge_data(known_data)
-      result["result"]
+        merge_data(known_data)
+        result["result"]
+      elsif result['success'].eql?(true)
+        reload
+      else
+        raise result
+      end
     end
 
     def destroy
