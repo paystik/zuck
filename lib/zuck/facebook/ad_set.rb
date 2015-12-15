@@ -22,7 +22,7 @@ module Zuck
                :frequency_cap,
                :frequency_cap_reset_period,
                :is_autobid,        #Did the advertiser express the intent to bid automatically. This field is not available if bid_info or bid_amount is returned.
-               :lifetime_fequency_cap,
+               :lifetime_frequency_cap,
                :lifetime_imps,     #Lifetime impressions. Available only for campaigns with buying_type=FIXED_CPM
                :name,
                :optimization_goal, #NONE, APP_INSTALLS, BRAND_AWARENESS, CLICKS, ENGAGED_USERS, EXTERNAL, EVENT_RESPONSES, IMPRESSIONS, LINK_CLICKS, OFFER_CLAIMS, OFFSITE_CONVERSIONS, PAGE_ENGAGEMENT, PAGE_LIKES, POST_ENGAGEMENT, REACH, SOCIAL_IMPRESSIONS, VIDEO_VIEWS
