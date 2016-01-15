@@ -25,9 +25,9 @@ module Zuck
 
     parent_object :ad_set, as: :adset_id
     list_path     :ads
-    connections   :ad_creatives, #Creative associated with this ad
-                  :insights,     #A Statistics result for an Ad object
-                  :previews      #Preview of the ad
+    connections   :ad_creatives,       #Creative associated with this ad
+                  :ad_group_insights,  #A Statistics result for an Ad object
+                  :previews            #Preview of the ad
     #TODO: Remaining edges from https://developers.facebook.com/docs/marketing-api/reference/adgroup
     # :leads,                  #Leads submitted for this ad
     # :keywordstats,           #Stats of keywords of this ad
