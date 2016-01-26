@@ -7,7 +7,8 @@ module Zuck
                :rule,
                :description,
                :opt_out_link,
-               :retention_days
+               :retention_days,
+               :pixel_id
 
 
     parent_object :ad_account
@@ -22,7 +23,18 @@ module Zuck
       add_users(audience, "EMAIL_SHA256")
     end
 
-    alias :<< :emails= 
+    alias :<< :emails=
+    
+      
+    def self.create(graph, ad_account, data, opts= {})
+      path = ad_account.path + '/customaudiences'
+      result = post(graph, path, data, opts = {})
+      if result['id']
+        return true
+      else
+        return false
+      end
+    end
 
     def add_users(audience, hash_type)
       create_connection(graph, self.id, :users, payload: {data: audience, schema: hash_type}.to_json)
